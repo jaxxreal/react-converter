@@ -79,9 +79,11 @@ export class Exchanger extends Component {
                     <ul className="exchanger__actions">
                         <li className="exchanger__actions-item">
                             <button className="btn btn_round btn_transparent btn_40">
-                                <svg className="icon icon_add">
-                                    <use xlinkHref={ addIcon }/>
-                                </svg>
+                                <span className="btn__content">
+                                    <svg className="icon icon_add">
+                                        <use xlinkHref={ addIcon }/>
+                                    </svg>
+                                </span>
                             </button>
                             <span className="exchanger__actions-legend">
                                 Top Up
@@ -89,9 +91,11 @@ export class Exchanger extends Component {
                         </li>
                         <li className="exchanger__actions-item">
                             <button className="btn btn_round btn_transparent btn_40">
-                                <svg className="icon icon_cached">
-                                    <use xlinkHref={ cachedIcon }/>
-                                </svg>
+                                <span className="btn__content">
+                                    <svg className="icon icon_cached">
+                                        <use xlinkHref={ cachedIcon }/>
+                                    </svg>
+                                </span>
                             </button>
                             <span className="exchanger__actions-legend">
                                 Exchange
@@ -99,9 +103,11 @@ export class Exchanger extends Component {
                         </li>
                         <li className="exchanger__actions-item">
                             <button className="btn btn_round btn_transparent btn_40">
-                                <svg className="icon icon_arrow-forward">
-                                    <use xlinkHref={ arrowForwardIcon }/>
-                                </svg>
+                                <span className="btn__content">
+                                    <svg className="icon icon_arrow-forward">
+                                        <use xlinkHref={ arrowForwardIcon }/>
+                                    </svg>
+                                </span>
                             </button>
                             <span className="exchanger__actions-legend">
                                 Bank

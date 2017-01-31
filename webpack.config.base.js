@@ -6,7 +6,7 @@ const path = require('path');
 const webpack = require('webpack');
 const packageJson = require('./package.json');
 
-const dependencies = Object.keys(packageJson.dependencies);
+const dependencies = Object.keys(packageJson.dependencies).filter(v => v !== 'normalize.css');
 const BASE_DIR = __dirname;
 const ENV = process.env.NODE_ENV;
 

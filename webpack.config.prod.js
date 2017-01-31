@@ -13,7 +13,7 @@ const baseConfig = require('./webpack.config.base');
 module.exports = webpackMerge.smart(baseConfig, {
     devtool: 'source-map',
     output: {
-        publicPath: '/exchanger'
+        publicPath: '/exchanger/'
     },
     chunkFilename: '[id].[hash].chunk.js',
     module: {
@@ -32,7 +32,7 @@ module.exports = webpackMerge.smart(baseConfig, {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('styles.css'),
+        new ExtractTextPlugin('styles.css', { allChunks: true }),
         new webpack.DefinePlugin({
             '__DEV__': JSON.stringify(false),
             'process.env': {
