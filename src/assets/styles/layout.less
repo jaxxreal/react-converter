@@ -1,0 +1,19 @@
+@import "mixins";
+
+html {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.layout {
+    // force iphone 5 like screen resolution
+    width: 320px;
+    height: 568px;
+    border: 1px solid;
+    overflow: auto;
+    .abs-center();
+}
