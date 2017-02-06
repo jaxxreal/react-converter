@@ -27,6 +27,14 @@ module.exports = webpackMerge.smart(baseConfig, {
         ]
     },
     module: {
+        preLoaders: [
+            {
+                loader: 'eslint',
+                include: [path.join(__dirname, 'src')],
+                exclude: /(node_modules|bower_components|dist)/,
+                test: /\.jsx?$/
+            }
+        ],
         loaders: [
             {
                 test: /\.jsx?$/,
@@ -44,6 +52,7 @@ module.exports = webpackMerge.smart(baseConfig, {
         hot: true,
         historyApiFallback: true,
         stats: 'minimal',
+        host: '0.0.0.0'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin({

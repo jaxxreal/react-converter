@@ -1,49 +1,42 @@
 @import "mixins";
 
-.exchanger {
-    &__inner {
-        background: url('../images/wallpaper.jpg');
-        background-size: cover;
-        color: white;
-        min-height: 310px;
+.exchanger-pane {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    transition: right .3s ease;
+    background: url('../images/wallpaper.jpg') black;
+    background-size: cover;
+    z-index: 1000;
+    &_open {
+        right: 0;
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        &-item {
+            position: relative;
+            &:nth-child(1n) {
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    bottom: -9px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    .triangle(down, 10px, transparent);
+                }
+            }
+            &:nth-child(2n) {
+                background: rgba(0, 0, 0, 0.2);
+            }
+        }
     }
     &__carousel {
-        padding-bottom: 70px;
         &-item {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            height: 150px;
-            &_active {
-            }
+            padding: 10px 20px;
         }
-        &-body {
-
-        }
-    }
-    &__actions {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        .list-reset();
-        &-item {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-        }
-        &-legend {
-            padding: 5px 0;
-            font-size: 13px;
-        }
-    }
-    &__history {
-        &-item {
-            &_empty {
-                text-align: center;
-                font-size: 16px;
-                padding: 5px 15px;
-            }
-        }
-        .list-reset();
     }
 }

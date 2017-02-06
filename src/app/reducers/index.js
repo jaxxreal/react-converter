@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux-immutable';
 
-import { reducer as exchanger } from '../containers/Exchanger';
+import { reducer as main } from '../containers/Main';
 
 const rootReducer = combineReducers({
-    exchanger,
+    main,
     // add here other reducers
 });
 

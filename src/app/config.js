@@ -13,3 +13,5 @@ export const CURRENCY_DESCRIPTIONS = {
     EUR: 'Euro Member Countries',
     GBP: 'United Kingdom Pound',
 };
+
+export const CURRENCIES_UPDATE_INTERVAL = 30000;

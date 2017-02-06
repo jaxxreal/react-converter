@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Exchanger } from '../containers/Exchanger';
+import { Main } from '../containers/Main';
 
 // rendered once, when app started, never will be unmount
 export default class AppWrapper extends Component {
@@ -12,7 +12,7 @@ export default class AppWrapper extends Component {
         return (
             <div className="layout">
                 <main>
-                    <Exchanger/>
+                    <Main/>
                 </main>
             </div>
         );

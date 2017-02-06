@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 
-// app styles
-import '../assets/styles/index.less';
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+
+// app styles
+import '../assets/styles/index.less';
 
 import configureStore from './store/configureStore';
 import AppWrapper from './components/AppWrapper';
@@ -21,3 +21,8 @@ render((
         <AppWrapper/>
     </Provider>
 ), document.getElementById('root'));
+
+window.onbeforeunload = () => {
+    const state = store.getState();
+    localStorage.setItem('operations', JSON.stringify(state.getIn(['main', 'operations']).toJS()));
+};

@@ -1,0 +1,62 @@
+@import "mixins";
+
+.main {
+    &__inner {
+        background: url('../images/wallpaper.jpg');
+        background-size: cover;
+        color: white;
+        height: 55vh;
+        position: relative;
+    }
+    &__carousel {
+        &-item {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 150px;
+            &_active {
+            }
+        }
+        &-body {
+
+        }
+    }
+    &__actions {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .list-reset();
+        &-item {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        &-legend {
+            padding: 5px 0;
+            font-size: 13px;
+        }
+    }
+    &__history {
+        height: 45vh;
+        overflow: auto;
+        &-item {
+            padding: 0 10px;
+            padding-bottom: 5px;
+            &_empty {
+                text-align: center;
+                font-size: 16px;
+                padding: 5px 15px;
+            }
+            &:first-child {
+                padding-top: 10px;
+            }
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+        .list-reset();
+    }
+}

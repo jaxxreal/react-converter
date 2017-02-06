@@ -1,25 +1,45 @@
-.operation {
-    &__icon {
+@import "mixins";
 
+@bg-like-color: #97a8b8;
+
+.operation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background: @bg-like-color;
+        .square(40px);
     }
     &__details {
 
     }
     &__legend {
-
+        font-size: 14px;
     }
     &__time {
-
+        color: grey;
+    }
+    &__time,
+    &__amount-prefix {
+        font-size: 11px;
     }
     &__amount {
-        &-item {
-            &_income {
-
-            }
-            &_outcome {
-
-            }
+        text-align: right;
+        &-prefix {
         }
     }
-
+    &__income {
+        font-size: 14px;
+    }
+    &__outcome {
+        font-size: 11px;
+        color: @bg-like-color;
+        .operation__amount-prefix {
+            font-size: 8px;
+        }
+    }
 }
