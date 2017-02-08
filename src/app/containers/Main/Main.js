@@ -15,6 +15,8 @@ import * as ExchangeActionCreators from './actions';
 
 import Operations from './containers/Operations';
 import ExchangePane from './containers/ExchangePane';
+import Rates from './containers/RatesPane';
+
 import { CarouselProgress } from '../../components/CarouselProgress';
 import { Account } from './components/Account';
 import { CURRENCIES_UPDATE_INTERVAL } from '../../config';
@@ -114,6 +116,7 @@ export class Main extends Component {
                 </div>
                 <Operations/>
                 <ExchangePane/>
+                <Rates/>
             </div>
         );
     }

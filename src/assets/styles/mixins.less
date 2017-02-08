@@ -12,12 +12,16 @@
     }
 }
 
-.oswald() {
-    font-family: Oswald, sans-serif;
-}
-
 .open-sans() {
     font-family: "Open Sans", sans-serif;
+}
+
+.font-light() {
+    font-weight: 300;
+}
+
+.font-normal() {
+    font-weight: 400;
 }
 
 // Dib fix
@@ -195,5 +199,20 @@
     input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }
+}
+
+.app-pane {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    transition: right .3s ease;
+    background: url('../images/wallpaper.jpg') black;
+    background-size: cover;
+    z-index: 1000;
+    &_open {
+        right: 0;
     }
 }

@@ -6,7 +6,20 @@
     justify-content: space-between;
     padding: 5px 0;
     &__item {
-
+        color: white;
+        &:nth-child(1) {
+            text-align: left;
+        }
+        &:nth-child(1),
+        &:nth-child(3) {
+            flex: 0 0 20%;
+        }
+        &:nth-child(2) {
+            margin: 0 auto;
+        }
+        &:nth-child(3) {
+            text-align: right;
+        }
     }
     &__control {
         .top-menu-control();

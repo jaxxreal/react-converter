@@ -1,18 +1,7 @@
 @import "mixins";
 
 .exchanger-pane {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: -100vw;
-    transition: right .3s ease;
-    background: url('../images/wallpaper.jpg') black;
-    background-size: cover;
-    z-index: 1000;
-    &_open {
-        right: 0;
-    }
+    .app-pane();
     &__content {
         display: flex;
         flex-direction: column;

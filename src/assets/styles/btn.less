@@ -5,6 +5,8 @@
     padding: 0;
     cursor: pointer;
     border: none;
+    display: inline-block;
+    .open-sans();
     &_round {
         border: 1px solid white;
         border-radius: 50%;
@@ -23,6 +25,12 @@
     }
     &_40 {
         .square(40px);
+    }
+    &_uppercase {
+        text-transform: uppercase;
+    }
+    &_padded {
+        padding: 7px 10px;
     }
     &__content {
         .flex-center();

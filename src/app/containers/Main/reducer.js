@@ -25,7 +25,8 @@ const INITIAL_STATE = fromJS({
     targetRates: [],
     operations: operations.map(o => Object.assign(o, { createdAt: new Date(o.createdAt) })),
     balances: [],
-    isPaneOpened: false,
+    isExchangePaneOpened: false,
+    isRatesPaneOpened: true, // TODO temp
     currencyExchangeFrom: 'USD',
     currencyExchangeTo: 'USD',
 });
@@ -61,10 +62,13 @@ export default function reducer(state = INITIAL_STATE, action = { type: null, pa
                 .set('conversionRates', fromJS(conversionRates));
         }
         case ActionTypes.TOGGLE_EXCHANGE_PANE: {
-            return state.set('isPaneOpened', !state.get('isPaneOpened'));
+            return state.set('isExchangePaneOpened', !state.get('isExchangePaneOpened'));
         }
         case ActionTypes.SET_EXCHANGE_PANE_VISIBILITY: {
-            return state.set('isPaneOpened', action.payload);
+            return state.set('isExchangePaneOpened', action.payload);
+        }
+        case ActionTypes.SET_RATES_PANE_VISIBILITY: {
+            return state.set('isRatesPaneOpened', action.payload);
         }
         case ActionTypes.SET_CURRENCY_EXCHANGE_FROM: {
             return state.set('currencyExchangeFrom', action.payload);

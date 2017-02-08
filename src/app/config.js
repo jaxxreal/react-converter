@@ -8,6 +8,12 @@ export const TARGET_CURRENCIES = [
     ['GBP', '£'],
 ];
 
+export const CURRENCIES_SIGNS = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+};
+
 export const CURRENCY_DESCRIPTIONS = {
     USD: 'United States Dollar',
     EUR: 'Euro Member Countries',

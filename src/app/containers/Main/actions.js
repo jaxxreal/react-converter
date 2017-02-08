@@ -72,3 +72,8 @@ export const exchangeCurrency = () => (dispatch) => {
     dispatch(performLogOperation());
     dispatch(performCleanup());
 };
+
+export const setRatesPaneVisibility = (isVisible) => ({
+    type: ActionTypes.SET_RATES_PANE_VISIBILITY,
+    payload: isVisible
+});

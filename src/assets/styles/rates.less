@@ -1,0 +1,40 @@
+@import "mixins";
+
+.rates {
+    .list-reset();
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 15px;
+        border-top: 1px solid rgba(0, 0, 0, 0.4);
+        &:first-child {
+            border-top: none;
+        }
+    }
+    &__base {
+        font-size: 26px;
+    }
+    &__rate {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        &-cost {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: baseline;
+            &-hundredth {
+                font-size: 26px;
+            }
+            &-thousandth {
+                font-size: 20px;
+            }
+        }
+        &-desc {
+            font-size: 12px;
+        }
+    }
+}

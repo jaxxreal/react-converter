@@ -50,6 +50,23 @@ export class ExchangePane extends Component {
         };
     }
 
+    getTopMenuConfig() {
+        return {
+            left: {
+                label: 'Cancel',
+                action: () => this.props.setExchangePaneVisibility(false)
+            },
+            center: {
+                label: this.getCurrencySelect(),
+                action: () => this.props.setRatesPaneVisibility(true)
+            },
+            right: {
+                label: 'Exchange',
+                action: this.props.exchangeCurrency
+            }
+        };
+    }
+
     setExchangeAmount(ev) {
         const { value } = ev.target;
         this.props.setExchangeAmount({ amount: value });
@@ -83,13 +100,14 @@ export class ExchangePane extends Component {
     render() {
         const { isOpen, accounts, exchangeAmountTo, exchangeAmountFrom } = this.props;
         const { fromBaseIdx, toBaseIdx } = this.state;
+        const { left, center, right } = this.getTopMenuConfig();
 
         return (
             <div className={ cx('exchanger-pane', { 'exchanger-pane_open': isOpen }) }>
                 <TopMenu
-                    left={ { label: 'Cancel', action: () => this.props.setExchangePaneVisibility(false) } }
-                    center={ { label: this.getCurrencySelect() } }
-                    right={ { label: 'Exchange', action: this.props.exchangeCurrency } }
+                    left={ left }
+                    center={ center }
+                    right={ right }
                 />
                 <div className="exchanger-pane__content">
                     <div className="exchanger-pane__content-item">
@@ -163,6 +181,7 @@ ExchangePane.propTypes = {
     setExchangeAmount: PropTypes.func.isRequired,
     setCurrencyExchangeFrom: PropTypes.func.isRequired,
     setCurrencyExchangeTo: PropTypes.func.isRequired,
+    setRatesPaneVisibility: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -174,7 +193,7 @@ export default connect(
         return {
             conversionRates: state.getIn(['main', 'conversionRates']),
             accounts: state.getIn(['main', 'accounts']),
-            isOpen: state.getIn(['main', 'isPaneOpened']),
+            isOpen: state.getIn(['main', 'isExchangePaneOpened']),
             exchangeAmountFrom,
             exchangeAmountTo,
         };

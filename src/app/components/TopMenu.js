@@ -1,26 +1,30 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 
-export const TopMenu = ({ left, center, right, className }) => (
+export const TopMenu = ({ left = {}, center = {}, right = {}, className }) => (
     <div className={ cx('top-menu', className) }>
-        <button
-            onClick={ left.action }
-            className="btn btn_transparent top-menu__control"
-        >
-            { left.label }
-        </button>
+        <div className="top-menu__item">
+            <button
+                onClick={ left.action }
+                className="btn btn_transparent top-menu__control"
+            >
+                { left.label }
+            </button>
+        </div>
         <div
             onClick={ center.action ? center.action : () => {} }
             className="top-menu__item"
         >
             { center.label }
         </div>
-        <button
-            onClick={ right.action }
-            className="btn btn_transparent top-menu__control"
-        >
-            { right.label }
-        </button>
+        <div className="top-menu__item">
+            <button
+                onClick={ right.action }
+                className="btn btn_transparent top-menu__control"
+            >
+                { right.label }
+            </button>
+        </div>
     </div>
 );
 
