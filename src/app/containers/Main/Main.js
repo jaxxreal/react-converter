@@ -15,7 +15,8 @@ import * as ExchangeActionCreators from './actions';
 
 import Operations from './containers/Operations';
 import ExchangePane from './containers/ExchangePane';
-import Rates from './containers/RatesPane';
+import UserRatesPane from './containers/UserRatesPane';
+import RatesFilterPane from './containers/RatesFilterPane';
 
 import { CarouselProgress } from '../../components/CarouselProgress';
 import { Account } from './components/Account';
@@ -116,7 +117,8 @@ export class Main extends Component {
                 </div>
                 <Operations/>
                 <ExchangePane/>
-                <Rates/>
+                <UserRatesPane/>
+                <RatesFilterPane/>
             </div>
         );
     }

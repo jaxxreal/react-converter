@@ -77,3 +77,13 @@ export const setRatesPaneVisibility = (isVisible) => ({
     type: ActionTypes.SET_RATES_PANE_VISIBILITY,
     payload: isVisible
 });
+
+export const setRatesFilterPaneVisibility = (isVisible) => ({
+    type: ActionTypes.SET_RATES_FILTER_PANE_VISIBILITY,
+    payload: isVisible
+});
+
+export const addNewRateToComparison = (base) => ({
+    type: ActionTypes.ADD_NEW_RATE_TO_COMPARISON,
+    payload: base
+});

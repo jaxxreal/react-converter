@@ -2,18 +2,23 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cx from 'classnames';
-import { Map } from 'immutable';
-// import _bindAll from 'lodash/bindAll';
+import { Map, List } from 'immutable';
+import _bindAll from 'lodash/bindAll';
 
 import * as MainActionCreators from '../actions';
-import CURRENCIES from '../../../currencies.json';
 import arrowLeftIcon from '../../../../assets/icons/arrow_left.svg';
 import addIcon from '../../../../assets/icons/add.svg';
 
 // components
 import { TopMenu } from '../../../components/TopMenu';
+import UserRatesItem from '../components/UserRatesItem';
 
-export class Rates extends PureComponent {
+export class UserRatesPane extends PureComponent {
+
+    constructor(props) {
+        super(props);
+        _bindAll(this, ['addNewRate']);
+    }
 
     getTopMenu() {
         return {
@@ -38,13 +43,18 @@ export class Rates extends PureComponent {
                             <use xlinkHref={ addIcon }/>
                         </svg>
                     </span>
-                )
+                ),
+                action: () => this.props.setRatesFilterPaneVisibility(true)
             }
         };
     }
 
+    addNewRate() {
+        this.props.setRatesFilterPaneVisibility(true);
+    }
+
     render() {
-        const { rates, isOpen } = this.props;
+        const { isOpen, ratesComparisonList, conversionRates } = this.props;
         const { left, center, right } = this.getTopMenu();
         return (
             <div className={ cx('rates-pane', { 'rates-pane_open': isOpen }) }>
@@ -53,31 +63,23 @@ export class Rates extends PureComponent {
                     center={ center }
                     right={ right }
                 />
-                <ul className="rates">
-                    { rates.map(([base, rate]) => (
+                <ul className="rates rates_scroll">
+                    { ratesComparisonList.map(base => (
                         base === this.props.base
                             ? null
-                            :
-                            <li key={ rate } className="rates__item">
-                                <span className="rates__base">1{ this.props.base }</span>
-                                <div className="rates__rate">
-                                    <div className="rates__rate-cost">
-                                        <span className="rates__rate-cost-hundredth">
-                                            { rate.toFixed(2) }
-                                        </span>
-                                        <span className="rates__rate-cost-thousandth">
-                                            { rate.toFixed(4).substr(-2, 2) }
-                                        </span>
-                                    </div>
-                                    <div className="rates__rate-desc">
-                                        { CURRENCIES[base] }
-                                    </div>
-                                </div>
-                            </li>
+                            : <UserRatesItem
+                                key={ base }
+                                baseTo={ base }
+                                baseFrom={ this.props.base }
+                                rate={ conversionRates.getIn([this.props.base, base], 0) }
+                            />
                     )) }
                 </ul>
                 <div className="rates-pane__footer rates-pane__footer_padded">
-                    <button className="btn btn_outlined btn_rounded btn_transparent btn_uppercase btn_padded">
+                    <button
+                        onClick={ this.addNewRate }
+                        className="btn btn_outlined btn_rounded btn_transparent btn_uppercase btn_padded"
+                    >
                         add new currency
                     </button>
                 </div>
@@ -86,23 +88,22 @@ export class Rates extends PureComponent {
     }
 }
 
-Rates.propTypes = {
+UserRatesPane.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     base: PropTypes.string.isRequired,
-    rates: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
+    conversionRates: PropTypes.instanceOf(Map).isRequired,
+    ratesComparisonList: PropTypes.instanceOf(List).isRequired,
 
     setRatesPaneVisibility: PropTypes.func.isRequired,
+    setRatesFilterPaneVisibility: PropTypes.func.isRequired,
 };
 
 export default connect(
-    state => {
-        const base = state.getIn(['main', 'currencyExchangeFrom']);
-        const [...rates] = state.getIn(['main', 'conversionRates', base], Map()).entries();
-        return {
-            base,
-            rates,
-            isOpen: state.getIn(['main', 'isRatesPaneOpened'])
-        };
-    },
+    state => ({
+        base: state.getIn(['main', 'currencyExchangeFrom']),
+        conversionRates: state.getIn(['main', 'conversionRates'], Map()),
+        ratesComparisonList: state.getIn(['main', 'ratesComparisonList'], List()),
+        isOpen: state.getIn(['main', 'isRatesPaneOpened'])
+    }),
     dispatch => bindActionCreators(MainActionCreators, dispatch)
-)(Rates);
+)(UserRatesPane);

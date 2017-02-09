@@ -1,5 +1,4 @@
 import { fromJS, Map } from 'immutable';
-import _pick from 'lodash/pick';
 
 import * as ActionTypes from './types';
 import { TARGET_CURRENCIES, CURRENCY_DESCRIPTIONS } from '../../config';
@@ -18,17 +17,18 @@ const operations = JSON.parse(window.localStorage.getItem('operations') || '[]')
 const INITIAL_STATE = fromJS({
     exchangeAmountFrom: '',
     exchangeAmountTo: '',
-    date: '',
     rates: {},
     conversionRates: {},
     accounts: TARGET_CURRENCIES.map(curr => getBalanceShape(curr, (Math.random() * 200))),
     targetRates: [],
     operations: operations.map(o => Object.assign(o, { createdAt: new Date(o.createdAt) })),
-    balances: [],
     isExchangePaneOpened: false,
-    isRatesPaneOpened: true, // TODO temp
+    isRatesPaneOpened: false, // TODO temp
+    isRatesFilterPaneOpened: false, // TODO temp
     currencyExchangeFrom: 'USD',
     currencyExchangeTo: 'USD',
+    availableCurrencies: [],
+    ratesComparisonList: TARGET_CURRENCIES.map(v => v[0]),
 });
 
 /** operation shape
@@ -41,16 +41,15 @@ const INITIAL_STATE = fromJS({
  }
  */
 
-export default function reducer(state = INITIAL_STATE, action = { type: null, payload: null }) {
+export default function reducer(state = INITIAL_STATE, action = {}) {
     switch (action.type) {
         case ActionTypes.SET_RATE: {
             const { date, rates } = action.payload;
-
-            const conversionRates = TARGET_CURRENCIES.reduce((result, curr) => {
-                const rate = rates[curr[0]]; // eur
-
-                result[curr[0]] = TARGET_CURRENCIES.reduce((res, cur) => {
-                    res[cur[0]] = rates[cur[0]] / rate; // gbp
+            const currencies = Object.keys(rates);
+            const conversionRates = currencies.reduce((result, curr) => {
+                const rate = rates[curr];
+                result[curr] = currencies.reduce((res, cur) => {
+                    res[cur] = rates[cur] / rate;
                     return res;
                 }, {});
                 return result;
@@ -58,7 +57,8 @@ export default function reducer(state = INITIAL_STATE, action = { type: null, pa
 
             return state
                 .set('date', date)
-                .set('rates', fromJS(_pick(rates, TARGET_CURRENCIES.map(([base]) => base))))
+                .set('rates', fromJS(rates))
+                .set('availableCurrencies', fromJS(currencies))
                 .set('conversionRates', fromJS(conversionRates));
         }
         case ActionTypes.TOGGLE_EXCHANGE_PANE: {
@@ -69,6 +69,9 @@ export default function reducer(state = INITIAL_STATE, action = { type: null, pa
         }
         case ActionTypes.SET_RATES_PANE_VISIBILITY: {
             return state.set('isRatesPaneOpened', action.payload);
+        }
+        case ActionTypes.SET_RATES_FILTER_PANE_VISIBILITY: {
+            return state.set('isRatesFilterPaneOpened', action.payload);
         }
         case ActionTypes.SET_CURRENCY_EXCHANGE_FROM: {
             return state.set('currencyExchangeFrom', action.payload);
@@ -105,6 +108,11 @@ export default function reducer(state = INITIAL_STATE, action = { type: null, pa
         case ActionTypes.LOG_EXCHANGE_OPERATION: {
             const log = state.get('operations');
             return state.set('operations', log.unshift(fromJS(action.payload)));
+        }
+        case ActionTypes.ADD_NEW_RATE_TO_COMPARISON: {
+            const availableCurrencies = state.get('ratesComparisonList');
+            return state
+                .set('ratesComparisonList', availableCurrencies.push(action.payload));
         }
         default:
             return state;

@@ -2,6 +2,10 @@
 
 .rates {
     .list-reset();
+    &_scroll {
+        max-height: 100vh;
+        overflow: auto;
+    }
     &__item {
         display: flex;
         align-items: center;
@@ -12,6 +16,9 @@
         border-top: 1px solid rgba(0, 0, 0, 0.4);
         &:first-child {
             border-top: none;
+        }
+        &_clickable {
+            cursor: pointer;
         }
     }
     &__base {
