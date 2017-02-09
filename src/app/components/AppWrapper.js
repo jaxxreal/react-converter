@@ -11,9 +11,7 @@ export default class AppWrapper extends Component {
     render() {
         return (
             <div className="layout">
-                <main>
-                    <Main/>
-                </main>
+                <Main/>
             </div>
         );
     }

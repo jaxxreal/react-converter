@@ -62,7 +62,7 @@ export class ExchangePane extends Component {
             },
             right: {
                 label: 'Exchange',
-                action: this.props.exchangeCurrency
+                action: this.props.exchangeAmountFrom ? this.props.exchangeCurrency : () => {}
             }
         };
     }

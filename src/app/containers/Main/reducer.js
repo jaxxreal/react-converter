@@ -86,6 +86,10 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
             const fromBase = state.get('currencyExchangeFrom');
             const toBase = state.get('currencyExchangeTo');
             const exchangeAmountFrom = parseInt(state.get('exchangeAmountFrom'), 10);
+
+            if (isNaN(exchangeAmountFrom)) {
+                return state;
+            }
             const rate = state.getIn(['conversionRates', fromBase, toBase]);
             const exchangeAmountTo = exchangeAmountFrom * rate;
 
