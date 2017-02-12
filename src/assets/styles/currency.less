@@ -1,3 +1,5 @@
+@import "mixins";
+
 .currency {
     &__row {
         display: flex;
@@ -15,11 +17,7 @@
         background: transparent;
         color: white;
         text-align: right;
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+        .no-number-spinner();
         &-wrapper {
 
         }

@@ -10,7 +10,7 @@ export default class AppWrapper extends Component {
 
     render() {
         return (
-            <div className="layout">
+            <div className="layout layout_centred">
                 <Main/>
             </div>
         );
