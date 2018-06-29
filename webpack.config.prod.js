@@ -11,19 +11,19 @@ const path = require('path');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = webpackMerge.smart(baseConfig, {
+    mode: 'production',
     devtool: 'source-map',
     output: {
         publicPath: '/exchanger/'
     },
-    chunkFilename: '[id].[hash].chunk.js',
+    chunkFilename: '[id].[hash].chunk.ts',
     module: {
         preLoaders: [],
         loaders: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel',
-                include: path.join(__dirname, 'src'),
-                exclude: /node_modules/
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: { onlyCompileBundledFiles: true }
             },
             {
                 test: /\.(less|css)$/,

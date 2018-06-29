@@ -1,8 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import _uniqueId from 'lodash/uniqueId';
 
-export const CarouselProgress = ({ size, selectedIdx }) => (
+interface CarouselProgressProps {
+    size: number;
+    selectedIdx: number;
+}
+
+export const CarouselProgress = ({ size, selectedIdx }: CarouselProgressProps) => (
     <div className="carousel-progress">
         <div className="carousel-progress__inner">
             { Array(size).fill(Math.random()).map((key, idx) => (
@@ -16,8 +21,3 @@ export const CarouselProgress = ({ size, selectedIdx }) => (
         </div>
     </div>
 );
-
-CarouselProgress.propTypes = {
-    selectedIdx: PropTypes.number.isRequired,
-    size: PropTypes.number.isRequired,
-};

@@ -18,50 +18,57 @@ const PORT = 8080;
 const HOST_URI = `http://${HOST}:${PORT}`;
 
 module.exports = webpackMerge.smart(baseConfig, {
-    devtool: 'cheap-module-eval-source-map',
+    // mode: 'development',
+    // devtool: 'cheap-module-eval-source-map',
     entry: {
         app: [
-            'webpack/hot/only-dev-server',
-            `webpack-dev-server/client?${HOST_URI}`,
+            // 'webpack/hot/only-dev-server',
+            // `webpack-dev-server/client?${HOST_URI}`,
             baseConfig.entry.app
         ]
     },
     module: {
-        preLoaders: [
+        rules: [
             {
-                loader: 'eslint',
-                include: [path.join(__dirname, 'src')],
-                exclude: /(node_modules|bower_components|dist)/,
-                test: /\.jsx?$/
-            }
-        ],
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                loaders: ['react-hot', 'babel'],
-                include: path.join(__dirname, 'src'),
-                exclude: /node_modules/
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: {
+                    onlyCompileBundledFiles: true,
+                    logLevel: 'error',
+                }
             },
             {
                 test: /\.(less|css)$/,
-                loader: 'style!css!postcss-loader!less?sourceMap',
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'postcss-loader',
+                    },
+                    {
+                        loader: 'less-loader',
+                    },
+                ]
             }
         ]
     },
     devServer: {
-        hot: true,
-        historyApiFallback: true,
-        stats: 'minimal',
-        host: '0.0.0.0'
+        // hot: true,
+        // historyApiFallback: true,
+        // stats: 'minimal',
+        // host: '0.0.0.0'
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin({
-            multiStep: true
-        }),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.NoErrorsPlugin(),
+        // new webpack.HotModuleReplacementPlugin({
+        //     multiStep: true
+        // }),
+        // new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
-            '__DEV__': JSON.stringify(true)
+            __DEV__: JSON.stringify(true),
         }),
         new HtmlWebpackPlugin({
             template: 'src/template.html'

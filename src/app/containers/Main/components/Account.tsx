@@ -1,9 +1,9 @@
-import React, { PureComponent, PropTypes } from 'react';
-import { Map } from 'immutable';
+import React, { PureComponent } from 'react';
+import { IAccount } from '../../../stores/exchangerStore';
 
-export class Account extends PureComponent {
+export class Account extends PureComponent<{ account: IAccount }, React.ComponentState> {
     getAmountParts() {
-        const amountStr = this.props.account.get('amount', 0).toFixed(2);
+        const amountStr = this.props.account.amount.toFixed(2);
         return amountStr.split('.');
     }
 
@@ -13,18 +13,14 @@ export class Account extends PureComponent {
         return (
             <div className="account">
                 <div className="account__main">
-                    <span className="account__sign">{ acc.get('sign') }</span>
+                    <span className="account__sign">{ acc.sign }</span>
                     <span className="account__int">{ int }.</span>
                     <span className="account__float">{ frac }</span>
                 </div>
                 <div className="account__legend">
-                    { acc.get('legend') }
+                    { acc.legend }
                 </div>
             </div>
         );
     }
 }
-
-Account.propTypes = {
-    account: PropTypes.instanceOf(Map).isRequired
-};
