@@ -18,6 +18,12 @@ interface UserRatesPaneProps {
 
 @inject('exchangerStore') @observer
 export class UserRatesPane extends React.Component<UserRatesPaneProps, React.ComponentState> {
+
+    constructor(props:UserRatesPaneProps){
+        super(props);
+        this.addNewRate = this.addNewRate.bind(this);
+    }
+
     @computed get isOpen() {
         return this.props.exchangerStore.state.isRatesPaneOpened;
     }
@@ -52,6 +58,7 @@ export class UserRatesPane extends React.Component<UserRatesPaneProps, React.Com
     }
 
     addNewRate() {
+        console.log(this);
         this.props.exchangerStore.setRatesFilterPaneVisibility(true);
     }
 

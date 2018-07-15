@@ -56,6 +56,9 @@ module.exports = webpackMerge.smart(baseConfig, {
             }
         ]
     },
+    resolve: {
+        alias: { mobx: path.resolve(__dirname, 'node_modules/mobx') },
+    },
     devServer: {
         // hot: true,
         // historyApiFallback: true,
