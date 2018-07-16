@@ -58,7 +58,6 @@ export class UserRatesPane extends React.Component<UserRatesPaneProps, React.Com
     }
 
     addNewRate() {
-        console.log(this);
         this.props.exchangerStore.setRatesFilterPaneVisibility(true);
     }
 
