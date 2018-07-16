@@ -1,4 +1,4 @@
-import { action, computed, toJS, observable } from 'mobx';
+import { action, computed, toJS, observable, runInAction} from 'mobx';
 
 import { TARGET_CURRENCIES, CURRENCY_DESCRIPTIONS, Currency, CurrencySign } from '../config';
 import { currency } from '../resources';
@@ -111,11 +111,12 @@ export class ExchangerStore {
             }, {} as any);
             return result;
         }, {} as any);
-
-        this.state.date = new Date(timestamp);
-        this.state.rates = rates;
-        this.state.availableCurrencies = currencies;
-        this.state.conversionRates = conversionRates;
+        runInAction('set rate', ()=> {
+            this.state.date = new Date(timestamp);
+            this.state.rates = rates;
+            this.state.availableCurrencies = currencies;
+            this.state.conversionRates = conversionRates;
+        });
     }
 
     @action toggleExchangePane() {

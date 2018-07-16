@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cx from 'classnames';
 import ReactSwipe from 'react-swipe';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 
 // images
@@ -44,7 +44,7 @@ export class Main extends React.Component<MainProps, React.ComponentState> {
         clearInterval(this.interval);
     }
 
-    selectBase = (selectedIdx: number) => {
+    @action selectBase = (selectedIdx: number) => {
         this.selectedIdx = selectedIdx;
     }
 

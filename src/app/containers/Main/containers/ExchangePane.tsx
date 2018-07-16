@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import _capitalize from 'lodash/capitalize';
 import ReactSwipe from 'react-swipe';
-import { observable, computed } from 'mobx';
+import { action, observable, computed } from 'mobx';
 import { inject, observer } from 'mobx-react';
 
 import { ExchangeDirection } from '../constants';
@@ -102,13 +102,17 @@ export class ExchangePane extends React.Component<ExchangePaneProps, React.Compo
 
     selectFromBase = (fromBaseIdx: number) => {
         this.props.exchangerStore.setCurrencyExchangeFrom(this.accounts[fromBaseIdx].base);
-        this.fromBaseIdx = fromBaseIdx;
+        action("selectFromBase", ()=> {
+            this.fromBaseIdx = fromBaseIdx;
+        });
         this.redoConvertion();
     }
 
     selectToBase = (toBaseIdx: number) => {
         this.props.exchangerStore.setCurrencyExchangeTo(this.accounts[toBaseIdx].base);
-        this.toBaseIdx = toBaseIdx;
+        action("selectToBase", ()=> {
+            this.toBaseIdx = toBaseIdx;
+        });
         this.redoConvertion();
     }
 
